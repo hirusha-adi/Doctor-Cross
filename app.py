@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request
 from PIL import Image, ImageDraw, ImageFont
 
 app = Flask(__name__)
+app_name = "Doctor Cross" 
 
 job_folder = os.path.join('static', 'jobs')
 
@@ -50,7 +51,7 @@ def generate_img(job_id, doc_name, doc_desc, show_desc):
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', app_name=app_name)
 
 
 @app.route('/gen', methods=['GET', 'POST'])
@@ -72,7 +73,7 @@ def gen():
         
         job_id = generate_img(job_id=job_id, doc_name=doc_name, doc_desc=doc_desc, show_desc=show_desc)
         
-        return send_from_directory('static', f'jobs/{job_id}.png', as_attachment=False)
+        return render_template('image.html', job_id=job_id)
 
     except Exception as e:
         return render_template('error.html', error=str(e))

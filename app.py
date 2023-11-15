@@ -65,7 +65,7 @@ def gen():
             raise ValueError("Missing parameters")
         
         show_desc = True
-        if doc_desc is None:
+        if (doc_desc is None) or (doc_desc == ""):
             show_desc = False
         else:
             if not doc_desc:

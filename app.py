@@ -1,5 +1,4 @@
 import os
-import platform
 
 from flask import Flask, render_template, request, send_from_directory
 from PIL import Image, ImageDraw, ImageFont
@@ -79,5 +78,6 @@ def gen():
         return render_template('error.html', error=str(e))
 
 if __name__ == "__main__":
+    init()
     app.run(host='0.0.0.0', port=8090, debug=True)
     

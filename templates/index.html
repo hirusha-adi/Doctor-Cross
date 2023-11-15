@@ -36,8 +36,6 @@
             var job_id = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
             console.log(job_id)
             $('#job_id').val(job_id);
-
-            // Hide/show the doc_desc input based on the checkbox state
             $('#include_desc').change(function () {
                 $('#doc_desc').prop('disabled', !$(this).prop('checked'));
             });

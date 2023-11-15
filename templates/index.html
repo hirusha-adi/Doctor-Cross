@@ -8,7 +8,18 @@
 </head>
 
 <body>
-    Home Page
+    <form action="/gen" method="post">
+        <label for="job_id">Job ID:</label>
+        <input type="text" name="job_id" readonly><br>
+
+        <label for="doc_name">Doctor Name:</label>
+        <input type="text" name="doc_name" required><br>
+
+        <label for="doc_desc">Doctor Description:</label>
+        <input type="text" name="doc_desc" required><br>
+
+        <button type="submit">Generate Image</button>
+    </form>
 </body>
 
 </html>

@@ -1,81 +1,66 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ app_name }} Generator</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+{% block title %}
+{{ app_name }} Generator
+{% endblock %}
 
-    <style>
-        #job_id {
-            display: none;
-        }
-    </style>
-</head>
+{% block more_head %}
+<style>
+    #job_id {
+        display: none;
+    }
+</style>
+{% endblock %}
 
-<body>
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container">
 
-    <body>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="container">
-            <div class="d-flex justify-content-center">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="400px">
-            </div>
-            <!-- Form -->
-            <form action="{{ url_for('gen') }}" method="post">
-                <!-- Job ID (Hidden) -->
-                <input id="job_id" type="text" name="job_id" value="{{ job_id }}" readonly>
-                <!-- Doctor Name -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="doc_name" name="doc_name" class="form-control" required />
-                    <label class="form-label" for="doc_name">Doctor Name</label>
-                </div>
-                <!-- Doctor Description -->
-                <div class="form-outline mb-4">
-                    <input type="text" id="doc_desc" name="doc_desc" class="form-control" disabled />
-                    <label class="form-label" for="doc_desc">Doctor Description</label>
-                </div>
-                <!-- Include Description -->
-                <div class="d-flex justify-content-center">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="include_desc"
-                            name="include_desc" />
-                        <label class="form-check-label" for="include_desc">Include Description</label>
-                    </div>
-                </div>
-                <br>
-                <!-- Submit -->
-                <button type="submit" class="btn btn-primary btn-block">Generate Image</button>
-            </form>
+    <!-- Top Logo -->
+    <div class="d-flex justify-content-center">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="400px">
+    </div>
+
+    <!-- Main Form -->
+    <form action="{{ url_for('gen') }}" method="post">
+        <!-- Job ID (Hidden) -->
+        <input id="job_id" type="text" name="job_id" value="{{ job_id }}" readonly>
+        <!-- Doctor Name -->
+        <div class="form-outline mb-4">
+            <input type="text" id="doc_name" name="doc_name" class="form-control" required />
+            <label class="form-label" for="doc_name">Doctor Name</label>
         </div>
+        <!-- Doctor Description -->
+        <div class="form-outline mb-4">
+            <input type="text" id="doc_desc" name="doc_desc" class="form-control" disabled />
+            <label class="form-label" for="doc_desc">Doctor Description</label>
+        </div>
+        <!-- Include Description -->
+        <div class="d-flex justify-content-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="include_desc" name="include_desc" />
+                <label class="form-check-label" for="include_desc">Include Description</label>
+            </div>
+        </div>
+        <br>
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary btn-block">Generate Image</button>
+    </form>
+</div>
+{% endblock %}
 
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <!-- MDB -->
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                var job_id = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
-                console.log(job_id)
-                $('#job_id').val(job_id);
-                $('#include_desc').change(function () {
-                    $('#doc_desc').prop('disabled', !$(this).prop('checked'));
-                });
-            });
-        </script>
-
-    </body>
-
-</html>
+{% block end_code %}
+<script>
+    $(document).ready(function () {
+        var job_id = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
+        console.log(job_id)
+        $('#job_id').val(job_id);
+        $('#include_desc').change(function () {
+            $('#doc_desc').prop('disabled', !$(this).prop('checked'));
+        });
+    });
+</script>
+{% endblock %}

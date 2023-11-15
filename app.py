@@ -73,10 +73,10 @@ def gen():
         
         job_id = generate_img(job_id=job_id, doc_name=doc_name, doc_desc=doc_desc, show_desc=show_desc)
         
-        return render_template('image.html', job_id=job_id)
+        return render_template('image.html', job_id=job_id, app_name=app_name)
 
     except Exception as e:
-        return render_template('error.html', error=str(e))
+        return render_template('error.html', app_name=app_name, error=str(e))
 
 if __name__ == "__main__":
     init()

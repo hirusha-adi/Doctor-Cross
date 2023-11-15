@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask, render_template, request
 from PIL import Image, ImageDraw, ImageFont
 
@@ -76,7 +75,7 @@ def gen():
         return render_template('image.html', job_id=job_id, app_name=app_name)
 
     except Exception as e:
-        return render_template('error.html', app_name=app_name, error=str(e))
+        return render_template('error.html', app_name=app_name, error=str(e), show_desc=show_desc)
 
 if __name__ == "__main__":
     init()

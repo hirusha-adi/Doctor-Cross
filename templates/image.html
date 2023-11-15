@@ -33,6 +33,13 @@ Result - {{ app_name }} Generator
         </div>
     </a>
 </div>
+<div class="d-flex justify-content-center">
+    <p>
+        <b>Filename:</b> <i>{{ job_id }}.png</i>,
+        <b>Resolution:</b> <i>4000x4000 px</i>,
+        <b>Transparency:</b> <i>{{'Yes' if show_desc == True else 'No' }}</i>
+    </p>
+</div>
 {% endblock %}
 
 {% block end_code %}

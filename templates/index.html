@@ -5,21 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
+
+    <!-- <style>
+        .hidden {
+            display: none;
+            visibility: hidden;
+        }
+    </style> -->
 </head>
 
 <body>
     <form action="/gen" method="post">
-        <label for="job_id">Job ID:</label>
-        <input type="text" name="job_id" readonly><br>
-
+        <input id="job_id" type="text" name="job_id" value="{{ job_id }}" readonly class="hidden">
+        <br>
         <label for="doc_name">Doctor Name:</label>
-        <input type="text" name="doc_name" required><br>
-
+        <input type="text" name="doc_name" required>
+        <br>
+        <input type="checkbox" id="include_desc" name="include_desc" value="true">
+        <label for="include_desc">Include Description</label>
+        <br>
         <label for="doc_desc">Doctor Description:</label>
-        <input type="text" name="doc_desc" required><br>
-
+        <input id="doc_desc" type="text" name="doc_desc" disabled>
+        <br>
         <button type="submit">Generate Image</button>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var job_id = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
+            console.log(job_id)
+            $('#job_id').val(job_id);
+
+            // Hide/show the doc_desc input based on the checkbox state
+            $('#include_desc').change(function () {
+                $('#doc_desc').prop('disabled', !$(this).prop('checked'));
+            });
+        });
+    </script>
+
 </body>
 
 </html>

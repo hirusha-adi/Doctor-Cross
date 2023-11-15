@@ -84,5 +84,5 @@ def gen():
 
 if __name__ == "__main__":
     init()
-    app.run(host='0.0.0.0', port=8090, debug=True)
+    app.run(host='0.0.0.0', port=8090, debug=False)
     

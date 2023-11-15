@@ -17,18 +17,22 @@ def generate_img(job_id, doc_name, doc_desc, show_desc):
     
     width, height = base_image.size
     
-    font_path = 'static/fonts/AntipastoPro-Bold_trial.ttf'
-    custom_font = ImageFont.truetype(font_path, 280)
+    font_bold_path = 'static/fonts/AntipastoPro-Bold_trial.ttf'
+    font_med_path = 'static/fonts/AntipastoPro-Medium_trial.ttf'
     
-    text_width, text_height = draw.textsize(doc_name, custom_font)
-    x = ((width - text_width) // 2)
-
+    print(show_desc)
     if show_desc is True:
+        font_bold = ImageFont.truetype(font_bold_path, 280)
+        text_width, text_height = draw.textsize(doc_name, font_bold)
+        x = ((width - text_width) // 2)
         y = ((height - text_height) // 2)+730
-        draw.text((x, y), doc_name, font=custom_font, fill=(0, 0, 0))
+        draw.text((x, y), doc_name, font=font_bold, fill=(0, 0, 0))
     elif show_desc is False:
-        y = ((height - text_height) // 2)+730
-        draw.text((x, y), doc_name, font=custom_font, fill=(0, 0, 0))
+        font_bold = ImageFont.truetype(font_bold_path, 310)
+        text_width, text_height = draw.textsize(doc_name, font_bold)
+        x = ((width - text_width) // 2)
+        y = ((height - text_height) // 2)+750
+        draw.text((x, y), doc_name, font=font_bold, fill=(0, 0, 0))
         
     job_folder = os.path.join('static', 'jobs')
     output_path = os.path.join(job_folder, f'{job_id}.png')
@@ -42,6 +46,7 @@ def gen():
         job_id = request.form.get('job_id')
         doc_name = request.form.get('doc_name')
         doc_desc = request.form.get('doc_desc')
+        
         if not job_id or not doc_name:
             raise ValueError("Missing parameters")
         

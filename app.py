@@ -11,12 +11,15 @@ def init():
     os.makedirs(job_folder, exist_ok=True)
 
 
-def generate_img(job_id, doc_name, doc_desc, show_desc):
-    
-    base_image_path = 'static/base.png'
+def generate_img(job_id, doc_name, doc_desc, show_desc, transparency):
+
+    if transparency:
+        base_image_path = 'static/base-transparent.png'
+    else:
+        base_image_path = 'static/base.png'
+        
     base_image = Image.open(base_image_path)
     draw = ImageDraw.Draw(base_image)
-    
     width, height = base_image.size
     
     font_bold_path = 'static/fonts/AntipastoPro-Bold_trial.ttf'
@@ -59,6 +62,8 @@ def gen():
         job_id = request.form.get('job_id')
         doc_name = request.form.get('doc_name')
         doc_desc = request.form.get('doc_desc')
+        enable_transparency = request.form.get('enable_transparency')
+        is_trans = enable_transparency is not None
         
         if not job_id or not doc_name:
             raise ValueError("Missing parameters")
@@ -70,7 +75,7 @@ def gen():
             if not doc_desc:
                 raise ValueError("Missing parameters")
         
-        job_id = generate_img(job_id=job_id, doc_name=doc_name, doc_desc=doc_desc, show_desc=show_desc)
+        job_id = generate_img(job_id=job_id, doc_name=doc_name, doc_desc=doc_desc, show_desc=show_desc, transparency=is_trans)
         
         return render_template('image.html', job_id=job_id, app_name=app_name)
 

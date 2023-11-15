@@ -1,13 +1,16 @@
 import os
+import platform
 
 from flask import Flask, render_template, request, send_from_directory
 from PIL import Image, ImageDraw, ImageFont
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('index.html')
+job_folder = os.path.join('static', 'jobs')
+
+def init():
+    os.makedirs(job_folder, exist_ok=True)
+
 
 def generate_img(job_id, doc_name, doc_desc, show_desc):
     
@@ -40,11 +43,16 @@ def generate_img(job_id, doc_name, doc_desc, show_desc):
         y = ((height - text_height) // 2)+750
         draw.text((x, y), doc_name, font=font_bold, fill=(0, 0, 0))
         
-    job_folder = os.path.join('static', 'jobs')
     output_path = os.path.join(job_folder, f'{job_id}.png')
     base_image.save(output_path)
     
     return job_id
+
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
+
 
 @app.route('/gen', methods=['GET', 'POST'])
 def gen():
@@ -69,7 +77,7 @@ def gen():
 
     except Exception as e:
         return render_template('error.html', error=str(e))
-    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8090, debug=True)
     

@@ -19,16 +19,22 @@ def generate_img(job_id, doc_name, doc_desc, show_desc):
     
     font_bold_path = 'static/fonts/AntipastoPro-Bold_trial.ttf'
     font_med_path = 'static/fonts/AntipastoPro-Medium_trial.ttf'
-    
-    print(show_desc)
+
     if show_desc is True:
-        font_bold = ImageFont.truetype(font_bold_path, 280)
+        font_bold = ImageFont.truetype(font_bold_path, 290)
         text_width, text_height = draw.textsize(doc_name, font_bold)
         x = ((width - text_width) // 2)
         y = ((height - text_height) // 2)+730
         draw.text((x, y), doc_name, font=font_bold, fill=(0, 0, 0))
+        
+        font_med = ImageFont.truetype(font_med_path, 200)
+        text_width, text_height = draw.textsize(doc_desc, font_med)
+        x = ((width - text_width) // 2)
+        y = ((height - text_height) // 2)+1025
+        draw.text((x, y), doc_desc, font=font_med, fill=(0, 0, 0))
+        
     elif show_desc is False:
-        font_bold = ImageFont.truetype(font_bold_path, 310)
+        font_bold = ImageFont.truetype(font_bold_path, 320)
         text_width, text_height = draw.textsize(doc_name, font_bold)
         x = ((width - text_width) // 2)
         y = ((height - text_height) // 2)+750
@@ -57,7 +63,7 @@ def gen():
             if not doc_desc:
                 raise ValueError("Missing parameters")
         
-        job_id = generate_img(job_id=job_id, doc_name=doc_name, doc_desc=doc_name, show_desc=show_desc)
+        job_id = generate_img(job_id=job_id, doc_name=doc_name, doc_desc=doc_desc, show_desc=show_desc)
         
         return send_from_directory('static', f'jobs/{job_id}.png', as_attachment=False)
 

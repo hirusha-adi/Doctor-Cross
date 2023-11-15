@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ app_name }} Generator
+{% endblock %}
+
+{% block more_head %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .floating-button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+        background-color: rgb(0, 143, 2);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* Set to 100% of the viewport height for full-screen centering */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('index') }}" type="button" class="btn btn-success btn-rounded floating-button">
+    <i class="fa-solid fa-arrow-left"></i>&nbsp&nbspGo Back
+</a>
+<div class="container">
+    <a class="ripple" href="#!">
+        <div class="d-flex justify-content-center">
+            <img id="generated_image" alt="{{ job_id }}" class="img-fluid rounded"
+                src="{{ url_for('static', filename='jobs/'+job_id+'.png') }}" width="80%" />
+        </div>
+    </a>
+</div>
+{% endblock %}
+
+{% block end_code %}
+<script>
+    $(document).ready(function () {
+        $('#generated_image').on('click', function () {
+            var imageUrl = $(this).attr('src');
+            var imageTitle = 'generated_image';
+            var downloadLink = $('<a></a>');
+            downloadLink.attr('href', imageUrl);
+            downloadLink.attr('download', imageTitle);
+            $('body').append(downloadLink);
+            downloadLink[0].click();
+            downloadLink.remove();
+        });
+    });
+</script>
+{% endblock %}

@@ -1,6 +1,6 @@
 # Doctor Cross
 
-create that green color cross for doctors thing easily
+Create that green color cross for doctors thing easily.
 
 <p align="center">
   <img src="https://github.com/hirusha-adi/Doctor-Cross/assets/36286877/74621cb3-2721-403b-a724-6166215a8ae9" width="400px"/>
@@ -8,7 +8,9 @@ create that green color cross for doctors thing easily
 
 
 
-# Usage
+# Setup
+
+## Run from Source
 
 1. Install Python
 2. Run these command to use a Virtual Enviroment
@@ -46,6 +48,18 @@ create that green color cross for doctors thing easily
    ```
    http://127.0.0.1:8090/
    ```
+
+## Using Docker
+
+1. **Build the Docker Image**: Open a terminal, navigate to your project directory, and run:
+    ```sh
+    docker build -t doctor-cross-app .
+    ```
+
+2. **Run the Docker Container**: Once the image is built, run the container using:
+    ```sh
+    docker run -p 8090:8090 doctor-cross-app
+    ```
 
 # Images
 

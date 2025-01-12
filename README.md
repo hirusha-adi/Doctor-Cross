@@ -51,6 +51,20 @@ Create that green color cross for doctors thing easily.
 
 ## Using Docker
 
+### from Docker Hub
+
+1. Pull the image from Docker Hub
+   ```
+   docker pull hirushaadi/doctor-cross-generator
+   ```
+
+2. Run the Docker Container
+    ```sh
+    docker run -p 8090:8090 doctor-cross-app
+    ```
+
+### by Building
+
 1. **Build the Docker Image**: Open a terminal, navigate to your project directory, and run:
     ```sh
     docker build -t doctor-cross-app .
@@ -66,6 +80,4 @@ Create that green color cross for doctors thing easily.
 ![image](https://github.com/hirusha-adi/Doctor-Cross/assets/36286877/52f25f09-370b-4863-a677-dbd225a8c322)
 
 ![image](https://github.com/hirusha-adi/Doctor-Cross/assets/36286877/3c7e5bfc-1816-494d-910b-02845ae4de6c)
-
-[base-transparent](https://github.com/hirusha-adi/Doctor-Cross/assets/36286877/74621cb3-2721-403b-a724-6166215a8ae9)
 
